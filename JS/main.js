@@ -1,7 +1,7 @@
 class Player {
     constructor() {
-        this.width = 10;
-        this.height = 10;
+        this.width = 4;
+        this.height = 4;
         this.positionX = 30;
         this.positionY = 0;
         this.domElm = null;
@@ -28,37 +28,37 @@ class Player {
             this.domElm.style.left = this.positionX + "vw";
         }
     }
-   
     moveLeft() {
         if (this.positionX > 0) {
             this.positionX--;
             this.domElm.style.left = this.positionX + "vw";
         }
     }
-
-    moveUp() {
-        if (this.positionY + this.width < 100) {
-            this.positionY += 10;
-            this.domElm.style.bottom = this.positionY + "vw";
-        } 
+    jump() {
+        if (this.positionY + this.height < 50) {
+            let newPositionY = this.positionY += 10;
+            const gravityDown = setInterval(() => {
+                if (newPositionY >= 0) {
+                    newPositionY -= 0.2;
+                    this.positionY = newPositionY;
+                    this.domElm.style.bottom = this.positionY + "vw";
+                } else {
+                    clearInterval(gravityDown);
+                }
+            }, 0.05);
+            setTimeout(() => {
+                clearInterval(gravityDown);
+            }, 3000);
+        }
     }
-
+    /*
     moveDown() {
         if (this.positionY > 0) {
             this.positionY--;
             this.domElm.style.bottom = this.positionY + "vw";
         }
     }
-
-/*
-    jump() {
-        if (this.positionY === 0) {
-            this.positionY + 10;
-            this.domElm.style.bottom = this.positionY + "vw";
-        }
-    } */
-
-
+    */
 }
 
 
@@ -68,26 +68,27 @@ class Player {
 
 class Obstacles {
     constructor() {
-        this.width = 5;
-        this.height = 5;
+        this.width = 3;
+        this.height = 3;
         this.positionX = Math.random() * 60 + 30;
         this.positionY = 100;
-        this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";   
+        this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
+
         this.domElm = null;
 
         this.createDomElement();
     }
     createDomElement() {
-    this.domElm = document.createElement("div");
+        this.domElm = document.createElement("div");
 
-    this.domElm.setAttribute("id", "obstacles");
-    this.domElm.style.width = this.width + "vw";
-    this.domElm.style.height = this.height + "vw";
-    this.domElm.style.left = this.positionX + "vw";
-    this.domElm.style.bottom = this.positionY + "vw";
+        this.domElm.setAttribute("id", "obstacles");
+        this.domElm.style.width = this.width + "vw";
+        this.domElm.style.height = this.height + "vw";
+        this.domElm.style.left = this.positionX + "vw";
+        this.domElm.style.bottom = this.positionY + "vw";
 
-    const boardElm = document.getElementById("board");
-    boardElm.appendChild(this.domElm);
+        const boardElm = document.getElementById("board");
+        boardElm.appendChild(this.domElm);
     }
 
     moveFromTop() {
@@ -95,22 +96,22 @@ class Obstacles {
             if (this.positionX + this.width >= 100) {
                 this.direction = "downLeft";
             } else {
-                this.positionY--;
-                this.positionX++;
+                this.positionY -= 0.5;
+                this.positionX += 0.5;
             }
         } else if (this.direction === "downLeft") {
             if (this.positionX <= 0) {
                 this.direction = "downRight";
             } else {
-                this.positionY--;
-                this.positionX--;
+                this.positionY -= 0.5;
+                this.positionX -= 0.5;
             }
         }
         this.domElm.style.bottom = this.positionY + "vw";
         this.domElm.style.left = this.positionX + "vw";
     }
 }
-    /*
+/*
     moveFromTop () {
         this.positionY--;
         this.domElm.style.bottom = this.positionY + "vw";
@@ -125,14 +126,14 @@ class Obstacles {
 //////////////////////////////////////////////
 /* Instantiate the Player & Obstacle Array */
 /////////////////////////////////////////////
-const player = new Player(); 
+const player = new Player();
 const obstacles = [];
 
 //////////////////////////////////////
 /* Creating obstacles - setInterval */
 //////////////////////////////////////
-setInterval (() => {
-    const newObstacle = new Obstacles ();
+setInterval(() => {
+    const newObstacle = new Obstacles();
     obstacles.push(newObstacle)
 }, 2000)
 
@@ -148,15 +149,7 @@ setInterval(() => {
             console.log("collision detected")
         }
     });
-}, 35);
-
-/*
-setInterval (() => {
-    obstacles.forEach((obstacleEvent) => {
-        obstacleEvent.moveFromLeft();
-    });
-}, 35);
-*/
+}, 30);
 
 
 
@@ -170,18 +163,11 @@ document.addEventListener("keydown", (event) => {
     } else if (event.code === 'ArrowRight') {
         console.log("right");
         player.moveRight();
-    } else if (event.code === 'ArrowUp') {
+    } else if (event.code === 'Space') {
         console.log("up");
-        player.moveUp();
-    } else if (event.code === 'ArrowDown') {
-        console.log("down");
-        player.moveDown();
-    }
-    
-    /* else if (event.code === 'Space') {
-        console.log("jump");
         player.jump();
-    } */
+    } /*else if (event.code === 'ArrowDown') {
+        console.log("down");
+        player.moveDown(); */
 });
-
 
