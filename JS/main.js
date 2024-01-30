@@ -1,7 +1,7 @@
 class Player {
     constructor() {
-        this.width = 15;
-        this.height = 5;
+        this.width = 10;
+        this.height = 10;
         this.positionX = 30;
         this.positionY = 0;
         this.domElm = null;
@@ -68,11 +68,11 @@ class Player {
 
 class Obstacles {
     constructor() {
-        this.width = 10;
-        this.height = 10;
+        this.width = 5;
+        this.height = 5;
         this.positionX = Math.random() * 60 + 30;
         this.positionY = 100;
-        this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
+        this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";   
         this.domElm = null;
 
         this.createDomElement();
@@ -106,13 +106,10 @@ class Obstacles {
                 this.positionX--;
             }
         }
-
         this.domElm.style.bottom = this.positionY + "vw";
         this.domElm.style.left = this.positionX + "vw";
-
     }
 }
-
     /*
     moveFromTop () {
         this.positionY--;
@@ -139,10 +136,17 @@ setInterval (() => {
     obstacles.push(newObstacle)
 }, 2000)
 
-setInterval (() => {
+setInterval(() => {
     obstacles.forEach((obstacleEvent) => {
         obstacleEvent.moveFromTop();
         // console.log(`There are ${obstacles.length} obstacles`)
+
+        if (player.positionX < obstacleEvent.positionX + obstacleEvent.width &&
+            player.positionX + player.width > obstacleEvent.positionX &&
+            player.positionY < obstacleEvent.positionY + obstacleEvent.height &&
+            player.height + player.positionY > obstacleEvent.positionY) {
+            console.log("collision detected")
+        }
     });
 }, 35);
 
