@@ -4,7 +4,7 @@ body {
 }
 
 #board {
-    background-color: blanchedalmond;
+    background-color: beige;
     height: 100vh;               /* 100 == fullscreen */
     position: relative;
     overflow: hidden;            /* for stopping the endless scroll */
@@ -15,7 +15,19 @@ body {
     position: absolute;
 }
 
+#shootingstars {
+    background-color: white;
+    position: absolute;
+}
+
 #obstacles {
     background-color: blue;
     position: absolute;
 }
+
+#goodies {
+    background-color: red;
+    position: absolute;
+}
+
+
