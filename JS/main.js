@@ -1,7 +1,7 @@
 class Player {
     constructor() {
-        this.width = 4;
-        this.height = 4;
+        this.width = 6;
+        this.height = 15;
         this.positionX = 30;
         this.positionY = 0;
         this.domElm = null;
@@ -34,31 +34,32 @@ class Player {
         }
     }
     jump() {
-        const maxJumpHeight = 50;  // Can jump up to half of the screen
+        const maxJumpHeight = 17 ;  // Can jump up to half of the screen
 
-        if (this.positionY + this.height < 100) {
-            let newPositionY = this.positionY += 15;
+        if (this.positionY + this.height < 50) {
+            // let newPositionY = this.positionY += 15;
 
             const jumpUp = setInterval(() => {
-                if (newPositionY < this.positionY + maxJumpHeight) {
-                    this.positionY += 0.1;
-                    this.domElm.style.bottom = this.positionY + "vw";
+                if (this.positionY < maxJumpHeight) {
+                    this.positionY += 0.9;
+                    this.domElm.style.bottom = this.positionY + "vh";
                 } else {
                     clearInterval(jumpUp);
                 }
-            }, 7000);
-            const gravityDown = setInterval(() => {
-                if (newPositionY >= 0) {
-                    newPositionY -= 0.2;
-                    this.positionY = newPositionY;
-                    this.domElm.style.bottom = this.positionY + "vw";
-                } else {
-                    clearInterval(gravityDown);
-                }
-            }, 0.05);
+            }, 0.1);
+            
             setTimeout(() => {
-                clearInterval(gravityDown);
-            }, 5000);
+                clearInterval(jumpUp);
+                const gravityDown = setInterval(() => {
+                    if (this.positionY >= 0) {
+                        this.positionY -= 0.2;
+                        //this.positionY = newPositionY;
+                        this.domElm.style.bottom = this.positionY + "vh";
+                    } else {
+                        clearInterval(gravityDown);
+                    }
+                }, 5);
+            }, 700);
         }
     }
     getPositionX() { // for shooting
@@ -83,8 +84,8 @@ class Player {
 
 class Obstacles {
     constructor() {
-        this.width = 3;
-        this.height = 3;
+        this.width = 4;
+        this.height = 8;
         this.positionX = Math.random() * 60 + 30;
         this.positionY = 100;
         this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
@@ -97,9 +98,9 @@ class Obstacles {
 
         this.domElm.setAttribute("id", "obstacles");
         this.domElm.style.width = this.width + "vw";
-        this.domElm.style.height = this.height + "vw";
+        this.domElm.style.height = this.height + "vh";
         this.domElm.style.left = this.positionX + "vw";
-        this.domElm.style.bottom = this.positionY + "vw";
+        this.domElm.style.bottom = this.positionY + "vh";
 
         const boardElm = document.getElementById("board");
         boardElm.appendChild(this.domElm);
@@ -121,7 +122,7 @@ class Obstacles {
                 this.positionX -= 0.5;
             }
         }
-        this.domElm.style.bottom = this.positionY + "vw";
+        this.domElm.style.bottom = this.positionY + "vh";
         this.domElm.style.left = this.positionX + "vw";
     }
 }
@@ -139,8 +140,8 @@ class Obstacles {
 
 class Goodies {
     constructor() {
-        this.width = 3;
-        this.height = 3;
+        this.width = 4;
+        this.height = 8;
         this.positionX = Math.random() * 60 + 30;
         this.positionY = 100;
         this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
@@ -154,9 +155,9 @@ class Goodies {
 
         this.domElm.setAttribute("id", "goodies");
         this.domElm.style.width = this.width + "vw";
-        this.domElm.style.height = this.height + "vw";
+        this.domElm.style.height = this.height + "vh";
         this.domElm.style.left = this.positionX + "vw";
-        this.domElm.style.bottom = this.positionY + "vw";
+        this.domElm.style.bottom = this.positionY + "vh";
 
         const boardElm = document.getElementById("board");
         boardElm.appendChild(this.domElm);
@@ -180,7 +181,7 @@ class Goodies {
                 this.positionX -= 0.2;
             }
         }
-        this.domElm.style.bottom = this.positionY + "vw";
+        this.domElm.style.bottom = this.positionY + "vh";
         this.domElm.style.left = this.positionX + "vw";
     }
 }
@@ -212,7 +213,8 @@ setInterval(() => {
             player.positionX + player.width > obstacleEvent.positionX &&
             player.positionY < obstacleEvent.positionY + obstacleEvent.height &&
             player.height + player.positionY > obstacleEvent.positionY) {
-            // console.log("collision detected")
+            console.log("collision detected")
+            obstacleEvent.domElm.remove(); 
             location.href = "gameover.html";
         }
     });
@@ -223,14 +225,14 @@ setInterval(() => {
 /* Creating Goodies - setInterval */
 //////////////////////////////////////
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const goodieCountElement = document.getElementById('goodieCount');
     // let collectedGoodies = 0;
 
-    const collectedGoodies = 0;
-    
+    let collectedGoodies = 0;
+
     const addParagraph = document.createElement("p");
-    addParagraph.textContent = "Collected Goodies: ${collectedGoodies}";
+    addParagraph.textContent = `Collected Goodies: ${collectedGoodies}`;
     goodieCountElement.appendChild(addParagraph);
 
     setInterval(() => {
@@ -249,12 +251,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 player.positionX + player.width > goodieEvent.positionX &&
                 player.positionY < goodieEvent.positionY + goodieEvent.height &&
                 player.height + player.positionY > goodieEvent.positionY) {
-                // console.log("goodie collected");
+                //console.log("goodie collected");
 
                 goodies.splice(index, 1); // SO it counts only once at collision
                 collectedGoodies++;
-                goodieEvent.visible = false; // hides element after collision
-                // console.log(collectedGoodies)
+                addParagraph.textContent = `Collected Treasures: ${collectedGoodies}`;
+                goodieEvent.domElm.remove(); // hides element after collision
+                //console.log(collectedGoodies)
             }
         });
         renderVisibleGoodies();
@@ -268,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const boardElm = document.getElementById("board");
 
         // Clear the board before rendering
-        boardElm.innerHTML = ''; 
+        //boardElm.innerHTML = ''; 
 
         boardElm.appendChild(player.domElm); // render the player
 
@@ -306,8 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-    /////////////////////
+ /////////////////////
 /* Shooting Class */
 ////////////////////
 

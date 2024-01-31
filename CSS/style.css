@@ -3,15 +3,39 @@ body {
     padding: 0;
 }
 
+p {
+    color: whitesmoke;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 #board {
-    background-color: beige;
+    background-image: url("/images/background-space.jpg");
+    background-size: cover;
     height: 100vh;               /* 100 == fullscreen */
+    background-position: center bottom;
     position: relative;
     overflow: hidden;            /* for stopping the endless scroll */
 }
 
+#goodieCount {
+    background-color: darkslategray;
+    font-size: larger white;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    width: 20vw;
+    height: 7vh;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+}
+
+
 #player {
-    background-color: green;
+    background-image: url("/images/player-new.png");
+    background-size: cover;
     position: absolute;
 }
 
@@ -21,12 +45,14 @@ body {
 }
 
 #obstacles {
-    background-color: blue;
+    background-image: url("/images/obstacle.png");
+    background-size: cover;
     position: absolute;
 }
 
 #goodies {
-    background-color: red;
+    background-image: url("/images/goodie.png");
+    background-size: cover;
     position: absolute;
 }
 
