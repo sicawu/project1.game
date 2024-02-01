@@ -10,13 +10,14 @@ p {
 }
 
 #board {
-    background-image: url("/images/background-space.jpg");
+    background-image: url("../images/background-space.jpg");
     background-size: cover;
     height: 100vh;               /* 100 == fullscreen */
     background-position: center bottom;
     position: relative;
     overflow: hidden;            /* for stopping the endless scroll */
 }
+
 
 #goodieCount {
     background-color: darkslategray;
@@ -32,28 +33,27 @@ p {
     border-radius: 1px;
 }
 
-
 #player {
-    background-image: url("/images/player-new.png");
+    background-image: url("../images/player-new.png"); 
     background-size: cover;
     position: absolute;
 }
 
-#shootingstars {
-    background-color: white;
-    position: absolute;
-}
-
 #obstacles {
-    background-image: url("/images/obstacle.png");
+    background-image: url("../images/obstacle.png");
     background-size: cover;
     position: absolute;
 }
 
 #goodies {
-    background-image: url("/images/goodie.png");
+    background-image: url("../images/goodie.png");
     background-size: cover;
     position: absolute;
 }
 
-
+/*
+#shootingstars {
+    background-color: white;
+    position: absolute;
+}
+*/

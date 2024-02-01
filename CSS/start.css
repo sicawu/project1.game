@@ -20,7 +20,7 @@ p {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.box {
+.startScreen {
     text-align: center;
     background-color: darkslategray;
     width: 300px;
@@ -30,7 +30,7 @@ p {
 
 }
 
-#button {
+#startGameButton {
     color: white;
     border: 1px solid white;
     /* background: transparent; */

@@ -5,8 +5,10 @@ class Player {
         this.positionX = 30;
         this.positionY = 0;
         this.domElm = null;
+        //this.playerImg = null;
 
         this.createDomElement();
+        // this.createPlayerImg ();
     }
     createDomElement() {
         this.domElm = document.createElement("div");
@@ -20,6 +22,16 @@ class Player {
         const boardElm = document.getElementById("board");
         boardElm.appendChild(this.domElm);
     }
+    /*  
+        createPlayerImg () {
+            this.playerImg = document.getElementById("boardElm")
+            const image = new Image ();
+            image.src = "./images/player-new.png";
+            image.alt = "Player";
+            image.style.width = "100%" ;
+            image.style.height = "100%" ;
+            this.playerImg.appendChild(image);
+        }  */
 
     moveRight() {
         if (this.positionX + this.width < 100) {
@@ -34,7 +46,7 @@ class Player {
         }
     }
     jump() {
-        const maxJumpHeight = 17 ;  // Can jump up to half of the screen
+        const maxJumpHeight = 17;  // Can jump up to this % of the screen;
 
         if (this.positionY + this.height < 50) {
             // let newPositionY = this.positionY += 15;
@@ -47,7 +59,7 @@ class Player {
                     clearInterval(jumpUp);
                 }
             }, 0.1);
-            
+
             setTimeout(() => {
                 clearInterval(jumpUp);
                 const gravityDown = setInterval(() => {
@@ -62,21 +74,25 @@ class Player {
             }, 700);
         }
     }
-    getPositionX() { // for shooting
-        return this.positionX;
-    }
-    getPositionY() { // for shooting
-        return this.positionY;
-    }
-    /*
-    moveDown() {
-        if (this.positionY > 0) {
-            this.positionY--;
-            this.domElm.style.bottom = this.positionY + "vw";
-        }
-    }
-    */
 }
+/*
+moveDown() {
+    if (this.positionY > 0) {
+        this.positionY--;
+        this.domElm.style.bottom = this.positionY + "vw";
+    }
+}
+*/
+/*
+ getPositionX() { // for shooting
+     return this.positionX;
+ }
+ getPositionY() { // for shooting
+     return this.positionY;
+ }
+ /*
+
+
 
 /////////////////////
 /* Obstacle Class */
@@ -210,7 +226,6 @@ setInterval(() => {
         obstacleEvent.moveFromTop();
         // console.log(`There are ${obstacles.length} obstacles`)
 
-        
         /* FOR TWO RECTANGLES
         if (player.positionX < obstacleEvent.positionX + obstacleEvent.width &&
             player.positionX + player.width > obstacleEvent.positionX &&
@@ -221,10 +236,10 @@ setInterval(() => {
             //location.href = "gameover.html";
         } */
 
-        // BETWEEN RECTANGLE & CIRCLE: Check distance between both centres, Pythagorean theorem to calculate distance, check that the distance is less than the radius.
+        // BETWEEN RECTANGLE & CIRCLE: Check distance between both centres, Pythagorean theorem to calculate distance, git acheck that the distance is less than the radius.
         const distanceXBetweenCentres = player.positionX + player.width / 2 - obstacleEvent.positionX - obstacleEvent.radius;
         const distanceYBetweenCentres = player.positionY + player.height / 2 - obstacleEvent.positionY - obstacleEvent.radius;
-        
+
         const distance = Math.sqrt(distanceXBetweenCentres * distanceXBetweenCentres + distanceYBetweenCentres * distanceYBetweenCentres);
 
         if (distance < player.width / 2 + obstacleEvent.radius) {
@@ -262,13 +277,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // console.log(`There are ${goodies.length} goodies`)
 
-            if (player.positionX < goodieEvent.positionX + goodieEvent.width -2 &&
-                player.positionX + player.width -2 > goodieEvent.positionX &&
-                player.positionY < goodieEvent.positionY + goodieEvent.height -2 &&
-                player.height -2.5 + player.positionY > goodieEvent.positionY) {
+            if (player.positionX < goodieEvent.positionX + goodieEvent.width - 2 &&
+                player.positionX + player.width - 2 > goodieEvent.positionX &&
+                player.positionY < goodieEvent.positionY + goodieEvent.height - 2 &&
+                player.height - 2.5 + player.positionY > goodieEvent.positionY) {
                 //console.log("goodie collected");
 
-                goodies.splice(index, 1); // SO it counts only once at collision
+                goodies.splice(index, 1); // So it counts only once at collision
                 collectedGoodies++;
                 addParagraph.textContent = `Collected Treasures: ${collectedGoodies}`;
                 goodieEvent.domElm.remove(); // hides element after collision
@@ -277,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         renderVisibleGoodies();
     }, 30);
+})
 
 
 ///////////////////
@@ -298,33 +314,31 @@ document.addEventListener('DOMContentLoaded', () => {
         obstacles.forEach((obstacleEvent) => {   // Render obstacles (if needed)
             boardElm.appendChild(obstacleEvent.domElm);
         });
-        
+    }
 
-    } 
+
+
+///////////////////
+/* EventListener */
+///////////////////
+document.addEventListener("keydown", (event) => {
+    if (event.code === "ArrowLeft") {
+        console.log("left");
+        player.moveLeft();
+    } else if (event.code === 'ArrowRight') {
+        console.log("right");
+        player.moveRight();
+    } else if (event.code === 'Space') {
+        console.log("up");
+        player.jump();
+    }
 })
 
 
-    ///////////////////
-    /* EventListener */
-    ///////////////////
-    document.addEventListener("keydown", (event) => {
-        if (event.code === "ArrowLeft") {
-            console.log("left");
-            player.moveLeft();
-        } else if (event.code === 'ArrowRight') {
-            console.log("right");
-            player.moveRight();
-        } else if (event.code === 'Space') {
-            console.log("up");
-            player.jump();
-        }
-    })
 
 
 
-
-
- /////////////////////
+/////////////////////
 /* Shooting Class */
 ////////////////////
 
@@ -374,15 +388,15 @@ createDomElement() {
 */
 
 
-    
-    /*
-    function animate () {
-        for (let i = shootingStars.length -1; i >= 0; i--){
-            const shootingStarSolo = shootingStars[i];
-            shootingStarSolo.update()
-        }
+
+/*
+function animate () {
+    for (let i = shootingStars.length -1; i >= 0; i--){
+        const shootingStarSolo = shootingStars[i];
+        shootingStarSolo.update()
     }
-    */
+}
+*/
 /*
 } else if (event.code === 'Space') {
     shootingStars.push(new ShootingStars({
@@ -402,4 +416,3 @@ createDomElement() {
     console.log("down");
     player.moveDown(); 
 } */
-
