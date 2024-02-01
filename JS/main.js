@@ -86,6 +86,7 @@ class Obstacles {
     constructor() {
         this.width = 4;
         this.height = 8;
+        this.radius = this.width / 2;
         this.positionX = Math.random() * 60 + 30;
         this.positionY = 100;
         this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
@@ -209,12 +210,26 @@ setInterval(() => {
         obstacleEvent.moveFromTop();
         // console.log(`There are ${obstacles.length} obstacles`)
 
+        
+        /* FOR TWO RECTANGLES
         if (player.positionX < obstacleEvent.positionX + obstacleEvent.width &&
             player.positionX + player.width > obstacleEvent.positionX &&
             player.positionY < obstacleEvent.positionY + obstacleEvent.height &&
             player.height + player.positionY > obstacleEvent.positionY) {
             console.log("collision detected")
             obstacleEvent.domElm.remove(); 
+            //location.href = "gameover.html";
+        } */
+
+        // BETWEEN RECTANGLE & CIRCLE: Check distance between both centres, Pythagorean theorem to calculate distance, check that the distance is less than the radius.
+        const distanceXBetweenCentres = player.positionX + player.width / 2 - obstacleEvent.positionX - obstacleEvent.radius;
+        const distanceYBetweenCentres = player.positionY + player.height / 2 - obstacleEvent.positionY - obstacleEvent.radius;
+        
+        const distance = Math.sqrt(distanceXBetweenCentres * distanceXBetweenCentres + distanceYBetweenCentres * distanceYBetweenCentres);
+
+        if (distance < player.width / 2 + obstacleEvent.radius) {
+            console.log("Collision detected");
+            obstacleEvent.domElm.remove();
             location.href = "gameover.html";
         }
     });
@@ -247,10 +262,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // console.log(`There are ${goodies.length} goodies`)
 
-            if (player.positionX < goodieEvent.positionX + goodieEvent.width &&
-                player.positionX + player.width > goodieEvent.positionX &&
-                player.positionY < goodieEvent.positionY + goodieEvent.height &&
-                player.height + player.positionY > goodieEvent.positionY) {
+            if (player.positionX < goodieEvent.positionX + goodieEvent.width -2 &&
+                player.positionX + player.width -2 > goodieEvent.positionX &&
+                player.positionY < goodieEvent.positionY + goodieEvent.height -2 &&
+                player.height -2.5 + player.positionY > goodieEvent.positionY) {
                 //console.log("goodie collected");
 
                 goodies.splice(index, 1); // SO it counts only once at collision
