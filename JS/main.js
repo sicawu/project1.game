@@ -9,7 +9,7 @@ class Player {
         //this.playerImg = null;
 
         this.createDomElement();
-        // this.createPlayerImg ();
+        //this.createPlayerImg ();
     }
     createDomElement() {
         this.domElm = document.createElement("div");
@@ -233,7 +233,6 @@ class Obstacles {
         this.domElm.style.left = this.positionX + "vw";
     }
 */
-
 
 //////////////////////////////////////////////
 /* Instantiate the Player & Obstacle Array */
