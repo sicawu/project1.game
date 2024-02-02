@@ -305,12 +305,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (collectedGoodies >= 3) {
                 obstacleEvent.moveFromTopLevelTwo();
-                boardElm.style.backgroundImage = "url('../images/background-desert.jpg')";
+                boardElm.style.backgroundImage = "url('../images/desert-landscape-spaceship.jpg')";
                 boardElm.style.backgroundImagePosition = "center";
             }
             if (collectedGoodies >= 5) {
                 obstacleEvent.moveFromTopLevelThree();
-                boardElm.style.backgroundImage = "url('../images/check.jpg')";
+                boardElm.style.backgroundImage = "url('../images/battefield-spaceship.jpg')";
             }
         });
     }, 15);
