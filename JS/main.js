@@ -34,13 +34,13 @@ class Player {
     */
     moveRight() {
         if (this.positionX + this.width < 100) {
-            this.positionX += this.speed;  
+            this.positionX += this.speed;
             this.domElm.style.left = this.positionX + "vw";
         }
     }
     moveLeft() {
         if (this.positionX > 0) {
-            this.positionX -= this.speed; 
+            this.positionX -= this.speed;
             this.domElm.style.left = this.positionX + "vw";
         }
     }
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setInterval(() => {
-       levelOne = obstacles.forEach((obstacleEvent) => {
+        levelOne = obstacles.forEach((obstacleEvent) => {
             obstacleEvent.moveFromTop();
             // console.log(`There are ${obstacles.length} obstacles`)
 
@@ -338,7 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderVisibleGoodies();
     }, 30);
 }
-
 )
 
 
