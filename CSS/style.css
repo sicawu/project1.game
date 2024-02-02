@@ -6,12 +6,13 @@ body {
 p {
     color: whitesmoke;
     font-size: large;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 #board {
-    background-image: url("../images/background-space.jpg");
+    background-image: url("../images/background-space.jpg"); alt: "galactic landscape";
     background-size: cover;
+    width: 100%;
     height: 100vh;               /* 100 == fullscreen */
     background-position: center bottom;
     position: relative;
@@ -21,39 +22,45 @@ p {
 
 #goodieCount {
     background-color: darkslategray;
-    font-size: larger white;
+    font-size:white;
     position: absolute;
-    top: 5px;
-    left: 10px;
-    width: 20vw;
-    height: 7vh;
+    top: 2vh;
+    left: 1vw;
+    width: 20%;
+    height: auto;
     text-align: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 1px;
+    padding: 5px;
+    margin: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 #player {
-    background-image: url("../images/player-new.png"); 
-    background-size: cover;
+    background-image: url("../images/player-new.png"); alt: "cute player";
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: contain;
     position: absolute;
 }
-
+/*
+#player img {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    display: block;
+}
+*/
 #obstacles {
-    background-image: url("../images/obstacle.png");
-    background-size: cover;
+    background-image: url("../images/obstacle.png"); alt: "dark round spaceship";
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: contain;
     position: absolute;
 }
 
 #goodies {
-    background-image: url("../images/goodie.png");
-    background-size: cover;
+    background-image: url("../images/goodie.png"); alt: "golden treasure";
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: contain;
     position: absolute;
 }
-
-/*
-#shootingstars {
-    background-color: white;
-    position: absolute;
-}
-*/

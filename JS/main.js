@@ -1,10 +1,11 @@
 class Player {
     constructor() {
-        this.width = 6;
-        this.height = 15;
+        this.width = 7;
+        this.height = 16.5;
         this.positionX = 30;
         this.positionY = 0;
         this.domElm = null;
+        this.speed = 2;  //to change the speed of player
         //this.playerImg = null;
 
         this.createDomElement();
@@ -22,26 +23,24 @@ class Player {
         const boardElm = document.getElementById("board");
         boardElm.appendChild(this.domElm);
     }
-    /*  
-        createPlayerImg () {
-            this.playerImg = document.getElementById("boardElm")
-            const image = new Image ();
-            image.src = "./images/player-new.png";
+    /*
+        createPlayerImg() {
+            this.playerImg = boardElm.getElementById("board")
+            const image = new Image();
+            image.src = "../images/player-new.png";
             image.alt = "Player";
-            image.style.width = "100%" ;
-            image.style.height = "100%" ;
-            this.playerImg.appendChild(image);
-        }  */
-
+            this.domElm.appendChild(image);
+        }
+    */
     moveRight() {
         if (this.positionX + this.width < 100) {
-            this.positionX++;
+            this.positionX += this.speed;  
             this.domElm.style.left = this.positionX + "vw";
         }
     }
     moveLeft() {
         if (this.positionX > 0) {
-            this.positionX--;
+            this.positionX -= this.speed; 
             this.domElm.style.left = this.positionX + "vw";
         }
     }
@@ -83,82 +82,11 @@ moveDown() {
     }
 }
 */
-/*
- getPositionX() { // for shooting
-     return this.positionX;
- }
- getPositionY() { // for shooting
-     return this.positionY;
- }
- /*
-
-
-
-/////////////////////
-/* Obstacle Class */
-////////////////////
-
-class Obstacles {
-    constructor() {
-        this.width = 4;
-        this.height = 8;
-        this.radius = this.width / 2;
-        this.positionX = Math.random() * 60 + 30;
-        this.positionY = 100;
-        this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
-
-        this.domElm = null;
-        this.createDomElement();
-    }
-    createDomElement() {
-        this.domElm = document.createElement("div");
-
-        this.domElm.setAttribute("id", "obstacles");
-        this.domElm.style.width = this.width + "vw";
-        this.domElm.style.height = this.height + "vh";
-        this.domElm.style.left = this.positionX + "vw";
-        this.domElm.style.bottom = this.positionY + "vh";
-
-        const boardElm = document.getElementById("board");
-        boardElm.appendChild(this.domElm);
-    }
-
-    moveFromTop() {
-        if (this.direction === "downRight") {
-            if (this.positionX + this.width >= 100) {
-                this.direction = "downLeft";
-            } else {
-                this.positionY -= 0.5;
-                this.positionX += 0.5;
-            }
-        } else if (this.direction === "downLeft") {
-            if (this.positionX <= 0) {
-                this.direction = "downRight";
-            } else {
-                this.positionY -= 0.5;
-                this.positionX -= 0.5;
-            }
-        }
-        this.domElm.style.bottom = this.positionY + "vh";
-        this.domElm.style.left = this.positionX + "vw";
-    }
-}
-/*
-    moveFromTop () {
-        this.positionY--;
-        this.domElm.style.bottom = this.positionY + "vw";
-    }
-
-    moveFromLeft () {
-        this.positionX++;
-        this.domElm.style.left = this.positionX + "vw";
-    }
-*/
 
 class Goodies {
     constructor() {
         this.width = 4;
-        this.height = 8;
+        this.height = 7;
         this.positionX = Math.random() * 60 + 30;
         this.positionY = 100;
         this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
@@ -204,51 +132,115 @@ class Goodies {
 }
 
 
+/////////////////////
+/* Obstacle Class */
+////////////////////
+
+class Obstacles {
+    constructor() {
+        this.width = 3.6;
+        this.height = 8;
+        this.radius = this.height / 2;
+        this.positionX = Math.random() * 60 + 30;
+        this.positionY = 100;
+        this.direction = Math.random() < 0.5 ? "downRight" : "downLeft";
+
+        this.domElm = null;
+        this.createDomElement();
+    }
+    createDomElement() {
+        this.domElm = document.createElement("div");
+
+        this.domElm.setAttribute("id", "obstacles");
+        this.domElm.style.width = this.width + "vw";
+        this.domElm.style.height = this.height + "vh";
+        this.domElm.style.left = this.positionX + "vw";
+        this.domElm.style.bottom = this.positionY + "vh";
+        this.domElm.style.radius = this.radius + "vh";
+
+        const boardElm = document.getElementById("board");
+        boardElm.appendChild(this.domElm);
+    }
+
+    moveFromTop() {
+        if (this.direction === "downRight") {
+            if (this.positionX + this.width >= 100) {
+                this.direction = "downLeft";
+            } else {
+                this.positionY -= 0.15;
+                this.positionX += 0.1;
+            }
+        } else if (this.direction === "downLeft") {
+            if (this.positionX <= 0) {
+                this.direction = "downRight";
+            } else {
+                this.positionY -= 0.15;
+                this.positionX -= 0.1;
+            }
+        }
+        this.domElm.style.bottom = this.positionY + "vh";
+        this.domElm.style.left = this.positionX + "vw";
+    }
+
+    moveFromTopLevelTwo() {
+        if (this.direction === "downRight") {
+            if (this.positionX + this.width >= 100) {
+                this.direction = "downLeft";
+            } else {
+                this.positionY -= 0.17;
+                this.positionX += 0.13;
+            }
+        } else if (this.direction === "downLeft") {
+            if (this.positionX <= 0) {
+                this.direction = "downRight";
+            } else {
+                this.positionY -= 0.17;
+                this.positionX -= 0.13;
+            }
+        }
+        this.domElm.style.bottom = this.positionY + "vh";
+        this.domElm.style.left = this.positionX + "vw";
+    }
+    moveFromTopLevelThree() {
+        if (this.direction === "downRight") {
+            if (this.positionX + this.width >= 100) {
+                this.direction = "downLeft";
+            } else {
+                this.positionY -= 0.1;
+                this.positionX += 0.3;
+            }
+        } else if (this.direction === "downLeft") {
+            if (this.positionX <= 0) {
+                this.direction = "downRight";
+            } else {
+                this.positionY += 0.4;
+                this.positionX -= 0.05;
+            }
+        }
+        this.domElm.style.bottom = this.positionY + "vh";
+        this.domElm.style.left = this.positionX + "vw";
+    }
+
+}
+/*
+    moveFromTop () {
+        this.positionY--;
+        this.domElm.style.bottom = this.positionY + "vw";
+    }
+
+    moveFromLeft () {
+        this.positionX++;
+        this.domElm.style.left = this.positionX + "vw";
+    }
+*/
+
 
 //////////////////////////////////////////////
 /* Instantiate the Player & Obstacle Array */
 /////////////////////////////////////////////
 const player = new Player();
-const obstacles = [];
 const goodies = [];
-// const shootingStars = [];
-
-//////////////////////////////////////
-/* Creating obstacles - setInterval */
-//////////////////////////////////////
-setInterval(() => {
-    const newObstacle = new Obstacles();
-    obstacles.push(newObstacle)
-}, 1500)
-
-setInterval(() => {
-    obstacles.forEach((obstacleEvent) => {
-        obstacleEvent.moveFromTop();
-        // console.log(`There are ${obstacles.length} obstacles`)
-
-        /* FOR TWO RECTANGLES
-        if (player.positionX < obstacleEvent.positionX + obstacleEvent.width &&
-            player.positionX + player.width > obstacleEvent.positionX &&
-            player.positionY < obstacleEvent.positionY + obstacleEvent.height &&
-            player.height + player.positionY > obstacleEvent.positionY) {
-            console.log("collision detected")
-            obstacleEvent.domElm.remove(); 
-            //location.href = "gameover.html";
-        } */
-
-        // BETWEEN RECTANGLE & CIRCLE: Check distance between both centres, Pythagorean theorem to calculate distance, git acheck that the distance is less than the radius.
-        const distanceXBetweenCentres = player.positionX + player.width / 2 - obstacleEvent.positionX - obstacleEvent.radius;
-        const distanceYBetweenCentres = player.positionY + player.height / 2 - obstacleEvent.positionY - obstacleEvent.radius;
-
-        const distance = Math.sqrt(distanceXBetweenCentres * distanceXBetweenCentres + distanceYBetweenCentres * distanceYBetweenCentres);
-
-        if (distance < player.width / 2 + obstacleEvent.radius) {
-            console.log("Collision detected");
-            obstacleEvent.domElm.remove();
-            location.href = "gameover.html";
-        }
-    });
-}, 30);
+const obstacles = [];
 
 
 //////////////////////////////////////
@@ -257,13 +249,71 @@ setInterval(() => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const goodieCountElement = document.getElementById('goodieCount');
-    // let collectedGoodies = 0;
+    const boardElm = document.getElementById("board");
 
     let collectedGoodies = 0;
+    let obstacleInterval = 2000;
+    let level = 1;
+    let levelOne;
 
     const addParagraph = document.createElement("p");
-    addParagraph.textContent = `Collected Goodies: ${collectedGoodies}`;
+    addParagraph.textContent = `Collected Treasures: ${collectedGoodies}`;
     goodieCountElement.appendChild(addParagraph);
+
+
+    /*const addParagraphLevel = document.createElement("p");
+    addParagraphLevel.textContent = `Level: ${level}`;
+    levelCountElement.appendChild(addParagraph);*/
+
+
+    //////////////////////////////////////
+    /* Creating obstacles - setInterval */
+    //////////////////////////////////////
+
+    setInterval(() => {
+        const newObstacle = new Obstacles();
+        obstacles.push(newObstacle);
+    }, obstacleInterval);
+    if (collectedGoodies >= 5) {
+    }
+
+    setInterval(() => {
+       levelOne = obstacles.forEach((obstacleEvent) => {
+            obstacleEvent.moveFromTop();
+            // console.log(`There are ${obstacles.length} obstacles`)
+
+            /* FOR TWO RECTANGLES
+            if (player.positionX < obstacleEvent.positionX + obstacleEvent.width &&
+                player.positionX + player.width > obstacleEvent.positionX &&
+                player.positionY < obstacleEvent.positionY + obstacleEvent.height &&
+                player.height + player.positionY > obstacleEvent.positionY) {
+                console.log("collision detected")
+                obstacleEvent.domElm.remove(); 
+                //location.href = "gameover.html";
+            } */
+
+            // BETWEEN RECTANGLE & CIRCLE: Check distance between both centres, Pythagorean theorem to calculate distance, git acheck that the distance is less than the radius.
+            const distanceXBetweenCentres = player.positionX + player.width / 2 - obstacleEvent.positionX - obstacleEvent.radius;
+            const distanceYBetweenCentres = player.positionY + player.height / 2 - obstacleEvent.positionY - obstacleEvent.radius;
+
+            const distance = Math.sqrt(distanceXBetweenCentres * distanceXBetweenCentres + distanceYBetweenCentres * distanceYBetweenCentres);
+
+            if (distance < player.width / 2 + obstacleEvent.radius) {
+                console.log("Collision detected");
+                obstacleEvent.domElm.remove();
+                location.href = "gameover.html";
+            }
+            if (collectedGoodies >= 3) {
+                obstacleEvent.moveFromTopLevelTwo();
+                boardElm.style.backgroundImage = "url('../images/background-desert.jpg')";
+                boardElm.style.backgroundImagePosition = "center";
+            }
+            if (collectedGoodies >= 5) {
+                obstacleEvent.moveFromTopLevelThree();
+                boardElm.style.backgroundImage = "url('../images/check.jpg')";
+            }
+        });
+    }, 15);
 
     setInterval(() => {
         const newGoodie = new Goodies();
@@ -275,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (goodieEvent.visible) {
                 goodieEvent.moveFromTop();
             }
-            // console.log(`There are ${goodies.length} goodies`)
+            //console.log(`There are ${goodies.length} goodies`)
 
             if (player.positionX < goodieEvent.positionX + goodieEvent.width - 2 &&
                 player.positionX + player.width - 2 > goodieEvent.positionX &&
@@ -287,35 +337,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 collectedGoodies++;
                 addParagraph.textContent = `Collected Treasures: ${collectedGoodies}`;
                 goodieEvent.domElm.remove(); // hides element after collision
-                //console.log(collectedGoodies)
+                //console.log(`${collectedGoodies}`)
             }
         });
         renderVisibleGoodies();
     }, 30);
-})
+}
+
+)
 
 
 ///////////////////
 ///// Rendering //
 //////////////////
-    function renderVisibleGoodies() {
-        const boardElm = document.getElementById("board");
+function renderVisibleGoodies() {
+    const boardElm = document.getElementById("board");
 
-        // Clear the board before rendering
-        //boardElm.innerHTML = ''; 
+    boardElm.appendChild(player.domElm);
 
-        boardElm.appendChild(player.domElm); // render the player
-
-        goodies.forEach((goodieEvent) => {
-            if (goodieEvent.visible) {
-                boardElm.appendChild(goodieEvent.domElm);
-            }
-        });
-        obstacles.forEach((obstacleEvent) => {   // Render obstacles (if needed)
-            boardElm.appendChild(obstacleEvent.domElm);
-        });
-    }
-
+    goodies.forEach((goodieEvent) => {
+        if (goodieEvent.visible) {
+            boardElm.appendChild(goodieEvent.domElm);
+        }
+    });
+    obstacles.forEach((obstacleEvent) => {
+        boardElm.appendChild(obstacleEvent.domElm);
+    });
+}
 
 
 ///////////////////
@@ -337,82 +385,3 @@ document.addEventListener("keydown", (event) => {
 
 
 
-
-/////////////////////
-/* Shooting Class */
-////////////////////
-
-/*class ShootingStars {
-   constructor (){
-    this.radius = 2;
-    this.domElm = null;
-
-    this.createDomElement();
-}
-createDomElement() {
-    this.domElm = document.createElement("div");
-
-    this.shootingStarElement.className = 'shooting-star';
-
-    const boardElm = document.getElementById("board");
-    boardElm.appendChild(this.domElm);
-   }
-   update() {   
-    const playerPositionX = this.playerInstance.getPositionX();
-    const playerPositionY = this.playerInstance.getPositionY();
-    console.log(`Player's Position: X = ${playerPositionX}, Y = ${playerPositionY}`);
-   }
-   shoot(){
-    const shootingStar = new ShootingStars();
-   }
-   
-      /*
-    constructor(position, velocity){
-    this.position = position;
-    this.velocity = velocity;
-    this.radius = 5
-   } 
-   draw () {
-    c.beginPath()
-    c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false)
-    c.closePath()
-    c.fillStyle = 'white'
-    c.fill()
-   }
-   update () {
-    this.draw()
-    this.position.x += this.velocity.x
-    this.position.y += this.velocity.y
-   }
-}
-*/
-
-
-
-/*
-function animate () {
-    for (let i = shootingStars.length -1; i >= 0; i--){
-        const shootingStarSolo = shootingStars[i];
-        shootingStarSolo.update()
-    }
-}
-*/
-/*
-} else if (event.code === 'Space') {
-    shootingStars.push(new ShootingStars({
-        position: {
-            x: player.positionX,
-            y: player.positionY
-        },
-        velocity: {
-            x: 1,
-            y: 0,
-        }
-    }));
-    shootingStars.update();
-    shootingStars.shoot();
-
-/*else if (event.code === 'ArrowDown') {
-    console.log("down");
-    player.moveDown(); 
-} */
