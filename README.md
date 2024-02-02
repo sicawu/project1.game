@@ -1,7 +1,7 @@
 # May the Pixels Be With You!🌟
 
 ## Instructions
-Help Kyroth to collect all the golden treasures. But be aware of the dark spaceships.
+Welcome to this galactic world. Help Kyroth to collect all the golden treasures. But be aware of the dark spaceships - they'll try to stop you from your mission. 
 
 Navigate with:
 

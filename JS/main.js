@@ -243,9 +243,9 @@ const goodies = [];
 const obstacles = [];
 
 
-//////////////////////////////////////
-/* Creating Goodies - setInterval */
-//////////////////////////////////////
+///////////////////////////////////////////////
+/* Creating Goodies & Obstacles- setInterval */
+///////////////////////////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
     const goodieCountElement = document.getElementById('goodieCount');
@@ -260,15 +260,10 @@ document.addEventListener('DOMContentLoaded', () => {
     addParagraph.textContent = `Collected Treasures: ${collectedGoodies}`;
     goodieCountElement.appendChild(addParagraph);
 
-
     /*const addParagraphLevel = document.createElement("p");
     addParagraphLevel.textContent = `Level: ${level}`;
     levelCountElement.appendChild(addParagraph);*/
 
-
-    //////////////////////////////////////
-    /* Creating obstacles - setInterval */
-    //////////////////////////////////////
 
     setInterval(() => {
         const newObstacle = new Obstacles();
