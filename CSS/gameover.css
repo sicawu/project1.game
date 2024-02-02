@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url("../images/burning-spaceship.jpg"); alt: "inside a burning spaceship";
+    background-image: url("../images/gameover-burning-spaceship.jpg");
     background-position: center bottom;
     font-display: white;
     display: flex;

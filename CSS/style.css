@@ -10,7 +10,7 @@ p {
 }
 
 #board {
-    background-image: url("../images/spaceship-in-jungle.jpg"); alt: "galactic landscape";
+    background-image: url("../images/level-one-spaceship-in-jungle.jpg");
     background-size: cover;
     width: 100%;
     height: 100vh;               /* 100 == fullscreen */
@@ -35,8 +35,7 @@ p {
 }
 
 #player {
-    background-image: url("../images/player-new.png"); alt: "cute player";
-    background-repeat: no-repeat;
+    background-image: url("../images/player-new.png"); 
     background-position: center; 
     background-size: contain;
     position: absolute;
@@ -50,7 +49,7 @@ p {
 }
 */
 #obstacles {
-    background-image: url("../images/obstacle.png"); alt: "dark round spaceship";
+    background-image: url("../images/obstacle.png"); 
     background-repeat: no-repeat;
     background-position: center; 
     background-size: contain;
@@ -58,7 +57,7 @@ p {
 }
 
 #goodies {
-    background-image: url("../images/goodie.png"); alt: "golden treasure";
+    background-image: url("../images/goodie.png");
     background-repeat: no-repeat;
     background-position: center; 
     background-size: contain;

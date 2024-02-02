@@ -298,14 +298,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 obstacleEvent.domElm.remove();
                 location.href = "gameover.html";
             }
-            if (collectedGoodies >= 3) {
+            if (collectedGoodies >= 5) {
                 obstacleEvent.moveFromTopLevelTwo();
-                boardElm.style.backgroundImage = "url('../images/desert-landscape-spaceship.jpg')";
+                boardElm.style.backgroundImage = "url('../images/level-two-desert-landscape-spaceship.jpg')";
                 boardElm.style.backgroundImagePosition = "center";
             }
-            if (collectedGoodies >= 5) {
+            if (collectedGoodies >= 10) {
                 obstacleEvent.moveFromTopLevelThree();
-                boardElm.style.backgroundImage = "url('../images/battefield-spaceship.jpg')";
+                boardElm.style.backgroundImage = "url('../images/level-three-battefield-spaceship.jpg')";
             }
         });
     }, 15);
