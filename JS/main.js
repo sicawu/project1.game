@@ -299,12 +299,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (collectedGoodies >= 5) {
                 obstacleEvent.moveFromTopLevelTwo();
-                boardElm.style.backgroundImage = "url('../images/level-two-desert-landscape-spaceship.jpg')";
+                boardElm.style.backgroundImage = "url('./images/level-two-desert-landscape-spaceship.jpg')";
                 boardElm.style.backgroundImagePosition = "center";
             }
             if (collectedGoodies >= 10) {
                 obstacleEvent.moveFromTopLevelThree();
-                boardElm.style.backgroundImage = "url('../images/level-three-battefield-spaceship.jpg')";
+                boardElm.style.backgroundImage = "url('./images/level-three-battefield-spaceship.jpg')";
             }
         });
     }, 15);
